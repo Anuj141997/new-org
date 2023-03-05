@@ -1,0 +1,64 @@
+<template>
+    <div class="slds-form-element">
+   <div class="slds-form-element__control">
+    <div class="slds-combobox_container">
+    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click"
+     aria-expanded="false" aria-haspopup="listbox" role="combobox">
+    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+        <lightning-input type='search' id='combo-id-16' value={accName} onchange={changeHandler}
+        onkeydown={click} onclick={click} onblur={click} aria-activedescendant='option1' label='Search Contact'
+        aria-autocomplete='list' aria-controls="listbox-id-16" role='textbox' placeholder='Search...'>
+    </lightning-input>
+
+   
+    </div>
+    <div if:true={noresult}>
+        No result found!!
+    </div>
+   
+    <template if:true={showvalues}>
+    <div class="slds-box" style='height:130px; overflow-y: scroll;'>
+    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+        <template for:each={accList} for:item='acc'>
+    <li class='slds-p-around_x-small' style='cursor: pointer;' key={acc.Id}
+    onclick={parent} data-val={acc.Id} data-name={acc.Name}>
+            {acc.Name}
+    </li>
+   </template>
+    </ul>
+
+    </div>
+    </template>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <section role="dialog" if:true={showmodal} tabindex="-1" aria-labelledby="modal-heading-01"
+     aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+        <header class="slds-modal__header">
+            <lightning-button-icon icon-name="utility:close" variant='bare' onclick={closemodal}
+                alternative-text="Close Window" style='float: right;'>
+            </lightning-button-icon>
+        
+        <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Account Creation</h2>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+        <lightning-record-edit-form object-api-name="Account" onsuccess={save}>
+            <lightning-input-field field-name="Name"></lightning-input-field>
+            <lightning-input-field field-name="Industry"></lightning-input-field>
+            <div class='slds-m-top_medium' align='center'>
+                <lightning-button label='Cancel' class='slds-m-top_small' onclick={reset}>
+
+                </lightning-button>
+            &nbsp;<lightning-button class='slds-m-top_small' label='Add New Contact'  
+                    variant='brand' ></lightning-button>             
+            </div>
+        </lightning-record-edit-form>
+        </div>
+        </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" if:true={showmodal}></div>
+
+</template>

@@ -1,0 +1,29 @@
+<aura:component controller='contlist'>
+    <aura:attribute name='accountId' type='String'></aura:attribute>
+    
+    <aura:registerEvent name="QuickContactEvent" type="c:QuickContactEvent" ></aura:registerEvent>
+    <aura:attribute name="CreateContact" type='Contact' default="{
+                                                                 sobjectName: 'Contact',
+                                                                 FirstName:'',
+                                                                 LastName:'',
+                                                                 Email:'',
+                                                                 Phone:''
+                                                                 }"/>
+    
+    
+    <div class='slds-p-around_x-small'>
+        
+        <lightning:input type='text' aura:id='contactForm' messageWhenValueMissing='First Name is missing' value='{!v.CreateContact.FirstName}' label='First Name' required='true'>
+        </lightning:input>
+        <lightning:input type='text' aura:id='contactForm' value='{!v.CreateContact.LastName}' label='Last Name' required='true'>
+        </lightning:input>
+        <lightning:input type='Email' aura:id='contactForm' pattern='.+@gmail.com' messageWhenPatternMismatch='Please enter correct email using gmail only' value='{!v.CreateContact.Email}' label='Email' required='true'>
+        </lightning:input>
+        <lightning:input type='Phone' aura:id='contactForm' value='{!v.CreateContact.Phone}' label='Phone'>
+        </lightning:input>
+        <div class='slds-p-around_x-small'>
+        	<lightning:button  variant='brand' label='Create Contact' onclick='{!c.doSave}'></lightning:button>
+        </div>
+        
+    </div>
+</aura:component>

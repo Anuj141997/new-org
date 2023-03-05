@@ -1,0 +1,613 @@
+<template>
+  <div style="background-color: white">
+    <!-- <lightning-input type="time" label="time"></lightning-input> -->
+    <div
+      class="
+        slds-col
+        slds-p-right_medium
+        slds-size_8-of-8
+        slds-small-size_12-of-12
+        slds-medium-size_10-of-12
+        slds-large-size_10-of-12
+      "
+    >
+      <div class="slds-grid slds-wrap">
+        <div
+          class="
+            slds-col
+            slds-m-top_large
+            slds-size_12-of-12
+            slds-small-size_10-of-12
+            slds-medium-size_5-of-8
+            slds-large-size_7-of-12
+          "
+        >
+          <lightning-input
+            type="time"
+            value={newEndTime}
+            name="newStartTime"
+            label="Start Time"
+            onchange={genericTimeClick}
+          >
+          </lightning-input>
+        </div>
+        <div
+          class="
+            slds-col
+            slds-m-top_medium
+            slds-size_12-of-12
+            slds-small-size_10-of-12
+            slds-medium-size_5-of-8
+            slds-large-size_7-of-12
+          "
+        >
+          <lightning-input
+            type="time"
+            value={newEndTime}
+            name="newEndTime"
+            label="End Time"
+            onchange={genericTimeClick}
+          >
+          </lightning-input>
+        </div>
+      </div>
+    </div>
+    <div class={className}>Hi Anuj</div>
+    <div
+      class="
+        slds-col
+        slds-small-size_1-of-1
+        slds-medium-size_1-of-2
+        slds-large-size_-1-of-2
+      "
+    >
+      <div class="slds-grid slds-grid_vertical">
+        <div
+          class="
+            slds-col
+            slds-small-size_1-of-1
+            slds-medium-size_1-of-1
+            slds-large-size_-1-of-1
+            slds-p-vertical_x-small
+          "
+        >
+          <!-- start time startes here-->
+
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="combobox-id-3"
+              >Start Time</label
+            >
+
+            <div class="slds-form-element__control">
+              <div class="slds-combobox_container">
+                <div
+                  class="
+                    slds-combobox
+                    slds-dropdown-trigger
+                    slds-dropdown-trigger_click
+                    slds-is-open
+                  "
+                  style="position: inherit"
+                  onclick={handlePress}
+                  id="startTime"
+                  aria-expanded="true"
+                  aria-haspopup="listbox"
+                  role="combobox"
+                >
+                  <div
+                    class="
+                      slds-combobox__form-element
+                      slds-input-has-icon slds-input-has-icon_right
+                    "
+                    role="none"
+                  >
+                    <input
+                      type="text"
+                      id="startTimeCombo"
+                      class="slds-input slds-combobox__input"
+                      aria-controls="listbox-id-4"
+                      autocomplete="off"
+                      role="textbox"
+                      placeholder="__:__"
+                      readonly=""
+                      onclick={handlePress}
+                      onkeydown={click}
+                      onblur={click}
+                    />
+                    <!-- <span
+                    class="
+                      slds-icon_container
+                      slds-icon-utility-down
+                      slds-input__icon slds-input__icon_right
+                    "
+                  > -->
+                    <!-- <img
+                      src="{!URLFOR($Resource.DCEVFLoginFlowSvgs,'DCEClock.svg')}"
+                      class="svgClass"
+                    /> -->
+                    <lightning-icon
+                      class="slds-input__icon"
+                      icon-name="utility:down"
+                      size="x-small"
+                      alternative-text="downicon"
+                    ></lightning-icon>
+                    <!-- </span> -->
+                  </div>
+                  <template if:true={showData}>
+                    <div
+                      class="
+                        slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid
+                      "
+                      style="margin-left: -2%; max-width: 95%; min-width: 10%"
+                    >
+                      <!-- <div
+                      class="slds-box"
+                      style="height: 130px; width: auto; overflow-y: scroll"
+                    > -->
+                      <ul
+                        class="slds-listbox slds-listbox_vertical"
+                        role="presentation"
+                      >
+                        <!-- <div
+                    class="slds-box"
+                    style="height: 130px; overflow-y: scroll"
+                  >
+                    <ul
+                      class="slds-listbox slds-listbox_vertical"
+                      role="presentation"
+                    > -->
+                        <template for:each={data} for:item="x">
+                          <li
+                            role="presentation"
+                            class="slds-listbox__item"
+                            key={x.Id}
+                            style="cursor: pointer"
+                          >
+                            <div
+                              title="test"
+                              class="
+                                slds-media
+                                slds-listbox__option slds-listbox__option_plain
+                                slds-media_small
+                              "
+                              role="option"
+                            >
+                              <span class="slds-media__body">
+                                <span class="slds-truncate" title="test1"
+                                  >{x.label}</span
+                                >
+                              </span>
+                            </div>
+                          </li>
+                        </template>
+                      </ul>
+                    </div>
+                  </template>
+
+                  <!-- <div
+                        id="option1"
+                        class="
+                          slds-media
+                          slds-listbox__option slds-listbox__option_plain
+                          slds-media_small
+                        "
+                        role="option"
+                      >
+                        <span
+                          class="slds-media__figure slds-listbox__option-icon"
+                        ></span>
+                        <span class="slds-media__body">
+                          <span class="slds-truncate" title="Accounts"
+                            >Accounts</span
+                          >
+                        </span>
+                      </div>
+                    </li>
+
+                    <li role="presentation" class="slds-listbox__item">
+                      <div
+                        id="option2"
+                        class="
+                          slds-media
+                          slds-listbox__option slds-listbox__option_plain
+                          slds-media_small
+                        "
+                        role="option"
+                      >
+                        <span
+                          class="slds-media__figure slds-listbox__option-icon"
+                        ></span>
+                        <span class="slds-media__body">
+                          <span class="slds-truncate" title="Reports"
+                            >Reports</span
+                          >
+                        </span> -->
+                  <!-- </div>
+                    </li>
+                  </ul>
+                </div>-->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="
+              slds-col
+              slds-small-size_1-of-1
+              slds-medium-size_1-of-1
+              slds-large-size_-1-of-1
+              slds-p-vertical_x-small
+            "
+          >
+            <!-- start time startes here-->
+
+            <div class="slds-form-element">
+              <label class="slds-form-element__label" for="combobox-id-3"
+                >Start Time</label
+              >
+
+              <div class="slds-form-element__control">
+                <div class="slds-combobox_container">
+                  <div
+                    class="
+                      slds-combobox
+                      slds-dropdown-trigger
+                      slds-dropdown-trigger_click
+                    "
+                    onclick={handlePress}
+                    id="startTime1"
+                    aria-expanded="true"
+                    aria-haspopup="listbox"
+                    role="combobox"
+                  >
+                    <div
+                      class="
+                        slds-combobox__form-element
+                        slds-input-has-icon slds-input-has-icon_right
+                      "
+                      role="none"
+                    >
+                      <input
+                        type="text"
+                        id="startTimeCombo1"
+                        class="slds-input slds-combobox__input"
+                        aria-controls="listbox-id-4"
+                        autocomplete="off"
+                        role="textbox"
+                        placeholder="test"
+                        readonly=""
+                        onclick={handlePress}
+                        onkeydown={click}
+                        onblur={click}
+                      />
+                      <!-- <span
+                    class="
+                      slds-icon_container
+                      slds-icon-utility-down
+                      slds-input__icon slds-input__icon_right
+                    "
+                  > -->
+                      <!-- <img
+                      src="{!URLFOR($Resource.DCEVFLoginFlowSvgs,'DCEClock.svg')}"
+                      class="svgClass"
+                    /> -->
+                      <lightning-icon
+                        class="slds-input__icon"
+                        icon-name="utility:down"
+                        size="x-small"
+                        alternative-text="downicon"
+                      ></lightning-icon>
+                      <!-- </span> -->
+                    </div>
+                    <template if:true={showData}>
+                      <div
+                        class="
+                          slds-box
+                          slds-dropdown
+                          slds-dropdown_length-5
+                          slds-dropdown_fluid
+                        "
+                      >
+                        <ul
+                          class="slds-listbox slds-listbox_vertical"
+                          role="presentation"
+                        >
+                          <!-- <div
+                    class="slds-box"
+                    style="height: 130px; overflow-y: scroll"
+                  >
+                    <ul
+                      class="slds-listbox slds-listbox_vertical"
+                      role="presentation"
+                    > -->
+                          <template for:each={data} for:item="x">
+                            <li
+                              role="presentation"
+                              class="slds-listbox__item"
+                              key={x.Id}
+                            >
+                              <div
+                                title="test"
+                                class="
+                                  slds-media
+                                  slds-listbox__option
+                                  slds-listbox__option_plain
+                                  slds-media_small
+                                "
+                                role="option"
+                              >
+                                <span class="slds-media__body">
+                                  <span class="slds-truncate" title="test1"
+                                    >{x.label}</span
+                                  >
+                                </span>
+                              </div>
+                            </li>
+                          </template>
+                        </ul>
+                      </div>
+                    </template>
+
+                    <!-- <div
+                        id="option1"
+                        class="
+                          slds-media
+                          slds-listbox__option slds-listbox__option_plain
+                          slds-media_small
+                        "
+                        role="option"
+                      >
+                        <span
+                          class="slds-media__figure slds-listbox__option-icon"
+                        ></span>
+                        <span class="slds-media__body">
+                          <span class="slds-truncate" title="Accounts"
+                            >Accounts</span
+                          >
+                        </span>
+                      </div>
+                    </li>
+
+                    <li role="presentation" class="slds-listbox__item">
+                      <div
+                        id="option2"
+                        class="
+                          slds-media
+                          slds-listbox__option slds-listbox__option_plain
+                          slds-media_small
+                        "
+                        role="option"
+                      >
+                        <span
+                          class="slds-media__figure slds-listbox__option-icon"
+                        ></span>
+                        <span class="slds-media__body">
+                          <span class="slds-truncate" title="Reports"
+                            >Reports</span
+                          >
+                        </span> -->
+                    <!-- </div>
+                    </li>
+                  </ul>
+                </div>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="slds-form-element">
+    <label
+      class="slds-form-element__label"
+      for="combobox-id-59"
+      id="combobox-label-id-132"
+      >Relate To</label
+    >
+    <div class="slds-form-element__control">
+      <div class="slds-combobox_container">
+        <div
+          class="
+            slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click
+          "
+        >
+          <div
+            class="
+              slds-combobox__form-element
+              slds-input-has-icon slds-input-has-icon_right
+            "
+            role="none"
+          >
+            <button
+              type="button"
+              class="slds-input_faux slds-combobox__input"
+              aria-labelledby="combobox-label-id-132 combobox-id-59-selected-value"
+              id="combobox-id-59-selected-value"
+              aria-controls="listbox-id-1"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+            >
+              <span class="slds-truncate" id="combobox-value-id-99"
+                >Select an Option…</span
+              >
+            </button>
+            <span
+              class="
+                slds-icon_container
+                slds-icon-utility-down
+                slds-input__icon slds-input__icon_right
+              "
+            >
+              <svg
+                class="
+                  slds-icon slds-icon slds-icon_x-small
+                  slds-icon-text-default
+                "
+                aria-hidden="true"
+              >
+                <use
+                  xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"
+                ></use>
+              </svg>
+            </span>
+          </div>
+          <div
+            id="listbox-id-1"
+            class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+            role="listbox"
+          >
+            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+              <li role="presentation" class="slds-listbox__item">
+                <div
+                  id="option4"
+                  class="
+                    slds-media
+                    slds-listbox__option slds-listbox__option_plain
+                    slds-media_small
+                  "
+                  role="option"
+                >
+                  <span
+                    class="slds-media__figure slds-listbox__option-icon"
+                  ></span>
+                  <span class="slds-media__body">
+                    <span class="slds-truncate" title="Accounts">Accounts</span>
+                  </span>
+                </div>
+              </li>
+              <li role="presentation" class="slds-listbox__item">
+                <div
+                  id="option5"
+                  class="
+                    slds-media
+                    slds-listbox__option slds-listbox__option_plain
+                    slds-media_small
+                  "
+                  role="option"
+                >
+                  <span
+                    class="slds-media__figure slds-listbox__option-icon"
+                  ></span>
+                  <span class="slds-media__body">
+                    <span class="slds-truncate" title="Reports">Reports</span>
+                  </span>
+                </div>
+              </li>
+              <li role="presentation" class="slds-listbox__item">
+                <div
+                  id="option3"
+                  class="
+                    slds-media
+                    slds-listbox__option slds-listbox__option_plain
+                    slds-media_small
+                  "
+                  role="option"
+                >
+                  <span
+                    class="slds-media__figure slds-listbox__option-icon"
+                  ></span>
+                  <span class="slds-media__body">
+                    <span class="slds-truncate" title="Contacts">Contacts</span>
+                  </span>
+                </div>
+              </li>
+              <li role="presentation" class="slds-listbox__item">
+                <div
+                  id="option6"
+                  class="
+                    slds-media
+                    slds-listbox__option slds-listbox__option_plain
+                    slds-media_small
+                  "
+                  role="option"
+                >
+                  <span
+                    class="slds-media__figure slds-listbox__option-icon"
+                  ></span>
+                  <span class="slds-media__body">
+                    <span class="slds-truncate" title="Files">Files</span>
+                  </span>
+                </div>
+              </li>
+              <li role="presentation" class="slds-listbox__item">
+                <div
+                  id="option7"
+                  class="
+                    slds-media
+                    slds-listbox__option slds-listbox__option_plain
+                    slds-media_small
+                  "
+                  role="option"
+                >
+                  <span
+                    class="slds-media__figure slds-listbox__option-icon"
+                  ></span>
+                  <span class="slds-media__body">
+                    <span class="slds-truncate" title="Groups">Groups</span>
+                  </span>
+                </div>
+              </li>
+              <li role="presentation" class="slds-listbox__item">
+                <div
+                  id="option62"
+                  class="
+                    slds-media
+                    slds-listbox__option slds-listbox__option_plain
+                    slds-media_small
+                  "
+                  role="option"
+                >
+                  <span
+                    class="slds-media__figure slds-listbox__option-icon"
+                  ></span>
+                  <span class="slds-media__body">
+                    <span class="slds-truncate" title="Leads">Leads</span>
+                  </span>
+                </div>
+              </li>
+              <li role="presentation" class="slds-listbox__item">
+                <div
+                  id="option70"
+                  class="
+                    slds-media
+                    slds-listbox__option slds-listbox__option_plain
+                    slds-media_small
+                  "
+                  role="option"
+                >
+                  <span
+                    class="slds-media__figure slds-listbox__option-icon"
+                  ></span>
+                  <span class="slds-media__body">
+                    <span class="slds-truncate" title="Notes">Notes</span>
+                  </span>
+                </div>
+              </li>
+              <li role="presentation" class="slds-listbox__item">
+                <div
+                  id="option8"
+                  class="
+                    slds-media
+                    slds-listbox__option slds-listbox__option_plain
+                    slds-media_small
+                  "
+                  role="option"
+                >
+                  <span
+                    class="slds-media__figure slds-listbox__option-icon"
+                  ></span>
+                  <span class="slds-media__body">
+                    <span class="slds-truncate" title="Groups">Groups</span>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>-->
+  </div>
+</template>

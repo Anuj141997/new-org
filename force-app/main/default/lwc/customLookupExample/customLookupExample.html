@@ -1,0 +1,25 @@
+<template>
+  <article class="slds-card" style="padding: 20px">
+    <p style="color: blueviolet; font-size: 24px">
+      Custom Reusable Lookup Demo - LWC
+    </p>
+
+    <!--Custom Lookup with Pre-Populate Value for User Object-->
+    <c-look-up-cmp
+      icon-name="standard:contact"
+      s-object-api-name="contact"
+      label="Manager"
+      onlookupupdate={lookupRecord}
+      default-record-id="0035g00000ThswpAAB"
+      placeholder="Serach Manager..."
+    ></c-look-up-cmp>
+
+    <br />
+    <!--Custom Lookup without Pre-Populate Value for account Object-->
+    <!-- <c-custom-lookup-lwc icon-name="standard:account"
+                         s-object-api-name="account"
+                         label="My Fev Account"
+                         onlookupupdate={lookupRecord}
+                         placeholder="Search Account here..."></c-custom-lookup-lwc> -->
+  </article>
+</template>

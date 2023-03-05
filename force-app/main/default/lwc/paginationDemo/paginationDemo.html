@@ -1,0 +1,21 @@
+<template>
+
+    <lightning-card title='Pagination Demo' icon-name="custom:custom20">
+
+        <div class='slds-var-m-around_medium'>
+            <template if:true={newRec}>
+                <template for:each={newRec} for:item="r">
+                    <div key={r.id} >
+                        <strong>{r.Name}</strong>
+                        <p class="slds-var-p-bottom_medium">  Stage:{r.StageName}</p>
+                    </div>
+                    
+                </template>
+            </template>
+        </div>
+        <div slot='footer' class='slds-var-m-around_medium'>
+            <c-pagination records={totalRec} ongetdata={HandleSlicedData}></c-pagination>
+        </div>
+    </lightning-card>
+    
+</template>

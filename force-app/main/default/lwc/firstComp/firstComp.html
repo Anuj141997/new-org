@@ -1,0 +1,476 @@
+<template>
+
+    <lightning-card title='Custom Application' icon-name="custom:custom45">
+
+        
+        <div style='display:flex; flex-direction: column; gap: 10px;
+                    padding: 1rem 0 0 2rem; '>
+            <lightning-button label='Create Contact' variant='brand' style='width:fit-content'  onclick={conModal}></lightning-button>
+            <lightning-button label='Create Case' variant='brand' onclick={searchCon} style='width:fit-content'></lightning-button>
+            <lightning-button label='Report' variant='brand' onclick={report} style='width:fit-content'></lightning-button>
+        </div>
+        
+    </lightning-card>
+
+
+    <!-- CONTACT MODAL -->
+     <section role="dialog" if:true={showCon} tabindex="-1" aria-labelledby="modal-heading-01"
+     aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open" >
+        <div class="slds-modal__container" >
+        <header class="slds-modal__header">
+            <lightning-button-icon icon-name="utility:close" variant='bare' onclick={closemodal}
+                alternative-text="Close Window" style='float: right;'>
+            </lightning-button-icon>
+        
+        <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">New Contact</h2>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1" >
+          
+            <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                <span class="slds-truncate slds-p-horizontal_small" title="General Information">General Information
+                    <lightning-helptext content="Fill out the General information for Contact"></lightning-helptext>
+                </span>
+                </h3>
+                <div aria-hidden="false" class="slds-section__content">
+              <lightning-layout multiple-rows="true">
+                  <lightning-layout-item size="6" padding="around-small" >
+                      <lightning-input type='text' label='First Name' value={ConFname} onchange={ConChnage}></lightning-input>
+                      
+                    </lightning-layout-item>
+                    <lightning-layout-item size='6' padding='around-small'>
+                       <lightning-input type='text' label='Last Name' required value={ConLname} onchange={ConChnage}></lightning-input>
+                       
+                  </lightning-layout-item>
+                  <lightning-layout-item size='6' padding='around-small'>
+                       <lightning-input type='email' label='Email' required value={ConEmail} onchange={ConChnage}></lightning-input>
+                  </lightning-layout-item>
+                  <lightning-layout-item size='6' padding='around-small'>
+                       <lightning-input type='text' label='Phone' required value={ConPhn} onchange={ConChnage}></lightning-input>
+                      
+                  </lightning-layout-item>
+              </lightning-layout>
+                </div>
+                </div>
+
+             
+                <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                <span class="slds-truncate slds-p-horizontal_small" title="Address Information">Address Information</span>
+                </h3>
+                <div aria-hidden="false" class="slds-section__content">
+              <lightning-layout multiple-rows="true">
+                  <lightning-layout-item size="6" padding="around-small" >
+                      <lightning-input type='text' label='City' value={ConCity} onchange={ConChnage}></lightning-input>
+                  </lightning-layout-item>
+                    <lightning-layout-item size='6' padding='around-small' >
+                       <lightning-input type='text' label='State' value={ConState} onchange={ConChnage}></lightning-input>
+                    </lightning-layout-item>
+                   <lightning-layout-item size="6" padding="around-small" >
+                       <lightning-input type='text' label='Country' value={ConCount} onchange={ConChnage}></lightning-input>
+                    </lightning-layout-item>
+                     <lightning-layout-item size="6" padding="around-small" >   
+                        <lightning-input type='text' label='ZipCode' required value={ConZcode} onchange={ConChnage}></lightning-input>
+                      
+                  </lightning-layout-item>
+              </lightning-layout>
+                </div>
+                </div>
+           
+
+                 <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                <span class="slds-truncate slds-p-horizontal_small" title="Industry Information">Industry Information</span>
+                </h3>
+                <div aria-hidden="false" class="slds-section__content">
+              <lightning-layout multiple-rows="true">
+                  <lightning-layout-item size="6" padding="around-small">
+                      <lightning-combobox
+                        label='Business Vertical'
+                        value={BusinessSelectValue}
+                        placeholder='Select'
+                        options={BusinessData}
+                        onchange={BusinessSelect} required></lightning-combobox>
+                    </lightning-layout-item>
+                     <lightning-layout-item size="6" padding="around-small" >
+                       <lightning-input type='date' label='Date Procured' value={ConDate} required onchange={ConChnage}></lightning-input>
+
+                       </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small" >
+                        <lightning-combobox
+                        label='Division of Vertical'
+                        value={DivisionSelectValue}
+                        placeholder='Select'
+                        options={DivisionData}
+                        onchange={DivisionSelect} required></lightning-combobox>
+                    </lightning-layout-item>
+                  
+                       <lightning-layout-item size="6" padding="around-small" >
+                      <lightning-combobox
+                        label='Area of Division'
+                        value={AreaSelectValue}
+                        placeholder='Select'
+                        options={AreaData}
+                        onchange={AreaSelect}></lightning-combobox>
+                      
+                  </lightning-layout-item>
+              </lightning-layout>
+                </div>
+                </div>     
+                
+                  <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                <span class="slds-truncate slds-p-horizontal_small" title="Amount Information">Amount Information</span>
+                </h3>
+                <div aria-hidden="false" class="slds-section__content">
+              <lightning-layout multiple-rows="true">
+                  <lightning-layout-item size="6" padding="around-small" >
+                      <lightning-input type='number' label='Amount Invested' value={ConInvest} required onchange={ConChnage}></lightning-input>
+                  </lightning-layout-item>
+                    <lightning-layout-item size='6' padding='around-small' >
+                       <lightning-input type='number' label='Amount Earned' required value={ConEarn} onchange={ConChnage}></lightning-input>
+                    </lightning-layout-item>
+              </lightning-layout>
+                </div>
+                </div>
+
+                <template if:true={CaseWithCon}>
+                      <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                <span class="slds-truncate slds-p-horizontal_small" title="Case Information">Case Information</span>
+                </h3>
+                <div aria-hidden="false" class="slds-section__content">
+              <lightning-layout >
+                  <lightning-layout-item size="6" padding="around-small">
+                      <lightning-combobox
+                        name='Status'
+                        label='Status'
+                        value={StatusSelectValue}
+                        placeholder='Select Status'
+                        options={StatusPick.data.values}
+                        onchange={StatusSelect} required></lightning-combobox>                      
+                  </lightning-layout-item>
+                  <lightning-layout-item size="6" padding="around-small">
+                      <lightning-input type='text' label='Industry' disabled></lightning-input>                      
+                  </lightning-layout-item>
+              </lightning-layout>
+                </div>
+                </div>
+           
+
+                 <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                <span class="slds-truncate slds-p-horizontal_small" title="Resolution Information">Resolution Information</span>
+                </h3>
+                <div aria-hidden="false" class="slds-section__content">
+              <lightning-layout multiple-rows="true">
+                  <lightning-layout-item size="7" padding="around-small">
+                      <lightning-combobox
+                        label='Action Taken'
+                        value={ActionSelectValue}
+                        placeholder='Select Action'
+                        options={ActionPick.data.values}
+                        onchange={ActionSelect} required></lightning-combobox>
+                       
+                    </lightning-layout-item>
+                    <lightning-layout-item size='10' padding='around-small'>
+                       <lightning-input type='text' label='Subject' value={csub} onchange={caseChange} required></lightning-input>                      
+                  </lightning-layout-item>
+                   <lightning-layout-item size='12' padding='around-small'>
+                        <lightning-textarea label='Description' onchange={caseChange} value={cdesc}></lightning-textarea>
+                   </lightning-layout-item>
+              </lightning-layout>
+                </div>
+                </div>
+                </template>
+        
+        </div>
+         <div class='slds-m-top_medium actions' align='center' >
+               
+            <lightning-button label='Cancel'
+                 class='slds-m-top_small' onclick={reset}>
+                </lightning-button>
+
+            &nbsp;
+            
+            <template if:true={CaseWithCon}>
+                 <lightning-button class='slds-m-top_small' label='Save' onclick={saveContactWithCase} 
+                    variant='brand' ></lightning-button>             
+            </template>
+            <template if:false={CaseWithCon}>
+                 <lightning-button class='slds-m-top_small' label='Save' onclick={saveContact} 
+                    variant='brand' ></lightning-button> 
+            </template>            
+            </div>
+        </div>
+        </section>
+<!-- ************************************************************************* -->
+
+<!-- SEARCH CONTACT MODAL -->
+        
+             <section role="dialog" if:true={showSearchCon} tabindex="-1" aria-labelledby="modal-heading-02"
+                     aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open" >
+        <div class="slds-modal__container" >
+        <header class="slds-modal__header">
+            <lightning-button-icon icon-name="utility:close" variant='bare' onclick={closemodal}
+                alternative-text="Close Window" style='float: right;'>
+            </lightning-button-icon>
+        
+        <h2 id="modal-heading-02" class="slds-modal__title slds-hyphenate">New Case</h2>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2" >
+
+            <lightning-layout class='search'>
+                <lightning-layout-item size='10'>
+                    <c-look-up-comp onselectid={handleSelectId} onselectname={handleSelectName}></c-look-up-comp>
+                </lightning-layout-item>
+                <lightning-layout-item style='margin-top: 23px; margin-right: 10px;'>
+                    <lightning-button label='Go' variant='brand' onclick={caseModal}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        
+         <div class='slds-m-top_small actions' align='center' >
+                <lightning-button label='Cancel' class='slds-m-top_small' onclick={reset}>
+
+                </lightning-button>
+            &nbsp;&nbsp;<lightning-button class='slds-m-top_small' label='Add New Contact'
+                                    onclick={ConWithCase} variant='brand' ></lightning-button>             
+            </div>
+        </div>
+        </section>
+
+        <!-- ****************************************************************************** -->
+
+        <!-- CASE MODAL -->
+
+          <section role="dialog" if:true={showCase} tabindex="-1" aria-labelledby="modal-heading-03"
+     aria-modal="true" aria-describedby="modal-content-id-3" class="slds-modal slds-fade-in-open" >
+        <div class="slds-modal__container" >
+        <header class="slds-modal__header">
+            <lightning-button-icon icon-name="utility:close" variant='bare' onclick={closemodal}
+                alternative-text="Close Window" style='float: right;'>
+            </lightning-button-icon>
+        
+        <h2 id="modal-heading-03" class="slds-modal__title slds-hyphenate">New Case</h2>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3" >
+          
+            <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                <span class="slds-truncate slds-p-horizontal_small" title="Contact Information">Contact Information</span>
+                </h3>
+                <div aria-hidden="false" class="slds-section__content">
+              <lightning-layout >
+                  <lightning-layout-item size="6" padding="around-small" >
+                      <lightning-input type='text' label='Contact' value={ConLookUp} disabled></lightning-input>
+                      
+                    </lightning-layout-item>
+                  
+              </lightning-layout>
+                </div>
+                </div>
+
+             
+                <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                <span class="slds-truncate slds-p-horizontal_small" title="Case Information">Case Information</span>
+                </h3>
+                <div aria-hidden="false" class="slds-section__content">
+              <lightning-layout >
+                  <lightning-layout-item size="6" padding="around-small">
+                      <lightning-combobox
+                        name='Status'
+                        label='Status'
+                        value={StatusSelectValue}
+                        placeholder='Select Status'
+                        options={StatusPick.data.values}
+                        onchange={StatusSelect} required></lightning-combobox>                      
+                  </lightning-layout-item>
+                  <lightning-layout-item size="6" padding="around-small">
+                      <lightning-input type='text' label='Industry' disabled></lightning-input>                      
+                  </lightning-layout-item>
+              </lightning-layout>
+                </div>
+                </div>
+           
+
+                 <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                <span class="slds-truncate slds-p-horizontal_small" title="Resolution Information">Resolution Information</span>
+                </h3>
+                <div aria-hidden="false" class="slds-section__content">
+              <lightning-layout multiple-rows="true">
+                  <lightning-layout-item size="7" padding="around-small">
+                      <lightning-combobox
+                        label='Action Taken'
+                        value={ActionSelectValue}
+                        placeholder='Select Action'
+                        options={ActionPick.data.values}
+                        onchange={ActionSelect} required></lightning-combobox>
+                       
+                    </lightning-layout-item>
+                    <lightning-layout-item size='10' padding='around-small'>
+                       <lightning-input type='text' label='Subject' value={csub} onchange={caseChange} required></lightning-input>                      
+                  </lightning-layout-item>
+                   <lightning-layout-item size='12' padding='around-small'>
+                        <lightning-textarea label='Description' onchange={caseChange} value={cdesc}></lightning-textarea>
+                   </lightning-layout-item>
+              </lightning-layout>
+                </div>
+                </div>
+        
+        </div>
+         <div class='slds-m-top_medium actions' align='center' >
+                <lightning-button label='Cancel' class='slds-m-top_small' onclick={reset}>
+
+                </lightning-button>
+            &nbsp;<lightning-button class='slds-m-top_small' label='Save' onclick={saveCase} 
+                    variant='brand' ></lightning-button>             
+            </div>
+        </div>
+        </section>
+<!--- ***************************************************************************   -->
+
+<!-- REPROT MODAL -->
+
+    <section role="dialog" if:true={showReport} tabindex="-1" aria-labelledby="modal-heading-04"
+                     aria-modal="true" aria-describedby="modal-content-id-4" class="slds-modal slds-fade-in-open" >
+        <div class="slds-modal__container" style='max-width: 70rem; width: 70rem;' >
+        <header class="slds-modal__header">
+            <lightning-button-icon icon-name="utility:close" variant='bare' onclick={closemodal}
+                alternative-text="Close Window" style='float: right;'>
+            </lightning-button-icon>
+        
+        <h2 id="modal-heading-04" class="slds-modal__title slds-hyphenate">REPORT</h2>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-4" >
+
+             <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade" style='margin-bottom: 20px;'>
+                <span class="slds-truncate slds-p-horizontal_small" title="Filter">Filter Options
+                    <lightning-helptext content="Filter out Data"></lightning-helptext>
+                </span>
+                </h3>
+        <lightning-layout style='margin-bottom: 20px;'>
+            <lightning-layout-item size='3' style='margin-left: 20px;'>
+               
+                <label for='cont' style='color: rgb(94, 92, 92); '>Search Contact</label>
+                <input type='search' class='input' name='cont' value={srcCon} onchange={searchChange}>
+
+            </lightning-layout-item>
+             <!-- <lightning-layout-item size='2' style='margin-left: 120px;'> -->
+               
+                <!-- <input type='search' name='cnm' value={cNum} onchange={numChange}>
+            </lightning-layout-item>
+
+             <lightning-layout-item size='2' style='margin-left: 15px;'>
+                
+                    <lightning-combobox
+                        label='Case Status'
+                        value={StatusFilterValue}
+                        placeholder='Select Status'
+                        options={StatusPick.data.values}
+                        onchange={searchChange}></lightning-combobox>
+                       
+                  
+            </lightning-layout-item>
+             <lightning-layout-item size='2' style='margin-left: 15px;'>
+                <lightning-combobox
+                        label='Action Taken'
+                        value={ActionFilterValue}
+                        placeholder='Select Action'
+                        options={ActionPick.data.values}
+                        onchange={searchChange}></lightning-combobox>
+            </lightning-layout-item> -->
+        </lightning-layout> 
+        </div>
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+            <thead>
+              <tr>
+               
+                <th scope="col" style='width: 420px;'>
+                    <div class='slds-truncate' title='Contact'>Contact</div>
+                </th>
+                <th scope="col" style='width: 200px;'>
+                    <div class='slds-truncate' title='Case'>Case Number</div>
+                </th>
+                <th scope="col" style='width: 200px;'>
+                    <div class='slds-truncate' title='Status'>Status</div>
+                </th>  
+                <th scope="col">
+                    <div class='slds-truncate' title='Action'>Action Taken</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                <template for:each={ReportData} for:item='acc' for:index='index'>
+                   
+                    <tr key={acc.Id} >
+                        
+                        <td style='background-color:rgb(160, 185, 231);'>
+                            Contact Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          {acc.Name}  <br>
+                            Ampount Invested:Amount Earned &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                            {acc.Amount_Invested__c}&nbsp;:&nbsp;{acc.Amount_Earned__c}  
+
+                        </td>
+                        <td style='background-color: rgb(160, 185, 231);'></td>
+                        <td style='background-color:rgb(160, 185, 231);'></td>
+                        <td style='background-color:rgb(160, 185, 231);'></td>
+                        
+                    </tr>
+
+                    <template for:each={acc.Cases} for:item='cas'>
+                        <tr key={acc.Id} >
+                            <td></td>                            
+                          <td style=' background-color: rgb(158, 216, 218);'>  {cas.CaseNumber}
+                          </td>  
+                          <td align='left' style='background-color: rgb(158, 216, 218);'>{cas.Status}</td>
+                          <td align='left' style='background-color: rgb(158, 216, 218);'>{cas.Action_Taken__c}</td>
+
+                          </tr>
+                          
+                        </template>
+                      
+                                                  
+                        <!-- <td>
+                            <lightning-input name='accind' access-key={index} id={index} type='text' onchange={change} value={acc.Industry} ></lightning-input>
+                        </td>
+                        <td>
+                            <lightning-input name='accphn' access-key={index} id={index} type='text' onchange={change} value={acc.Phone}></lightning-input>
+                        </td>
+                        <td>
+                            <lightning-icon icon-name='utility:delete' alternative-text='Delete' variant='border-inverse' access-key={index} id={index}  onclick={del} size='small' ></lightning-icon>
+                        </td> -->
+                   
+                </template>
+              
+            </tbody>
+          </table>
+   
+
+            
+        </div>
+        
+         <div class='actions' align='right' >
+                <lightning-button label='Close' class='slds-m-top_small' style='margin-right: 20px;' onclick={reset}>
+
+                </lightning-button>
+           
+            </div>
+        </div>
+        </section>
+<!-- **************************************************************************** -->
+
+
+ <div class="slds-backdrop slds-backdrop_open" if:true={showReport}></div>
+        <div class="slds-backdrop slds-backdrop_open" if:true={showCase}></div>
+         <div class="slds-backdrop slds-backdrop_open" if:true={showSearchCon}></div>
+        <div class="slds-backdrop slds-backdrop_open" if:true={showCon}></div>
+    
+</template>

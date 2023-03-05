@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title='Related Contacts'>
+
+        <div class='slds-m-around_medium'>
+
+            <lightning-combobox 
+                name='Accounts'
+                label='Accounts'
+                placeholder="Select Account"
+                options={options}
+                onchange={optionHandler}
+                value={selectedAccount}
+                >
+                
+            </lightning-combobox>
+        </div>
+
+    </lightning-card>
+</template>

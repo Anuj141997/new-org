@@ -1,0 +1,15 @@
+<template>
+  <lightning-card title="Spinner">
+    <lightning-button label="Show Spinner" variant="brand" onclick={spinner1}>
+    </lightning-button>
+    <p>Some Text1</p>
+    <p>Some Text2</p>
+    <template if:true={showSpinner}>
+      <c-loader
+        spinner-text="Loading"
+        spinner-size="small"
+        variant="base"
+      ></c-loader>
+    </template>
+  </lightning-card>
+</template>

@@ -1,0 +1,29 @@
+<!--
+  @description       : 
+  @author            : Anuj Panwar
+  @group             : 
+  @last modified on  : 10-14-2022
+  @last modified by  : Anuj Panwar
+  Modifications Log
+  Ver   Date         Author        Modification
+  1.0   10-14-2022   Anuj Panwar   Initial Version
+-->
+<template>
+  <lightning-card title="test">
+    <div slot="actions">test</div>
+    <div slot="footer">footer</div>
+
+    <c-child-test
+      ><p>content from parent</p>
+      <br />
+      <div>hi</div></c-child-test
+    >
+    <p>hi2</p>
+    <lightning-datatable
+      data={res}
+      columns={col}
+      hide-checkbox-column
+      key-field="Id"
+    ></lightning-datatable>
+  </lightning-card>
+</template>

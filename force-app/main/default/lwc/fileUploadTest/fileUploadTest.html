@@ -1,0 +1,21 @@
+<!--
+  @description       : 
+  @author            : Anuj Panwar
+  @group             : 
+  @last modified on  : 02-02-2023
+  @last modified by  : Anuj Panwar
+  Modifications Log
+  Ver   Date         Author        Modification
+  1.0   12-20-2022   Anuj Panwar   Initial Version
+-->
+<template>
+  <lightning-file-upload
+    label=""
+    name="fileUploader"
+    accept={acceptedFormats}
+    record-id={recId}
+    onuploadfinished={handleUploadFinished}
+    multiple
+  >
+  </lightning-file-upload>
+</template>

@@ -1,0 +1,43 @@
+<template>
+        <lightning-card title="Contact List with Filters">
+            <div class='slds-p-around_medium'>
+
+                <lightning-layout >
+                     <lightning-layout-item size='2' padding="around-small">
+                        <lightning-combobox label='Filter By' options={filterOption}
+                             value={filterBy}
+                            onchange={optionHandler}></lightning-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item size='3' padding="around-small">
+                        <lightning-input type='text' label='Filter' onkeyup={filterHandler}></lightning-input>
+                    </lightning-layout-item>
+                      <lightning-layout-item size='2' alignment-bump="left" padding="around-small">
+                        <lightning-combobox label='Sort By' options={sortOption}
+                             value={sortedBy}
+                            onchange={sortHandler}></lightning-combobox>
+                    </lightning-layout-item>
+                </lightning-layout>
+               <table>
+                   <thead>
+                       <tr>
+                           <template for:each={headings} for:item='i'>
+                                <th key={i}>{i}</th>
+                           </template>
+                          
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <template for:each={filterData} for:item='i'>
+                           <tr key={i.Id}>
+                               <td>{i.Id}</td>
+                               <td>{i.Name}</td>
+                               <td>{i.Title}</td>
+                               <td>{i.Email}</td>
+                           </tr>
+                       </template>
+                       
+                   </tbody>
+               </table>
+            </div>
+        </lightning-card>
+</template>

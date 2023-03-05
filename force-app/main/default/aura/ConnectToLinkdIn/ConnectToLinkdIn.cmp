@@ -1,0 +1,40 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" >
+	
+    
+    <aura:attribute name='isCode' type='boolean' default='true'></aura:attribute>
+    <aura:attribute name='header' type='String' default='Welcome to ConnectToLinkedIn'></aura:attribute>
+    <lightning:card >
+    	<h1 class='header'>{!v.header}</h1>
+        
+        <div class="slds-border_top slds-border_bottom slds-align_absolute-center" style='margin: 2rem;'>
+            
+            <div class='but1'>
+        	<aura:if isTrue='{!v.isCode}'>
+                
+                <lightning:button variant='brand-outline' label='Connect to LinkedIn'
+                                  title='Connect to LinkedIn' onclick='{!c.doGetAuthCode}'>
+                </lightning:button>
+                
+            <aura:set attribute='else'>
+                 <lightning:button variant='brand' label='Complete Authentication' onclick='{!c.doGetAccessToken}'>
+                </lightning:button>
+                </aura:set>
+            </aura:if>
+                </div>
+        </div>
+        	
+        <div class='slds-align_absolute-center  '>
+         	<lightning:button class='slds-m-right_large' variant='brand-outline' label='Show Basic Details'
+                                  title='Show Basic Details' onclick='{!c.doGetAuthCode}'>
+                </lightning:button>
+            
+            <lightning:button class='' variant='brand-outline' label='Share a Post'
+                                  title='Share a Post' onclick='{!c.doGetAuthCode}'>
+                </lightning:button>
+        </div>
+        
+        
+    
+    </lightning:card>
+    
+</aura:component>

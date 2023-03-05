@@ -1,0 +1,34 @@
+<template>
+    <lightning-card title="Books App">
+        <div class='slds-p-around_medium'>
+            <div class='slds-p-around_medium'>
+                <lightning-input type='search' value={searchKey}
+                onchange={handleSearch} label='Search Book'>
+            </lightning-input>
+            </div>
+
+            <lightning-layout multiple-rows>
+                <template if:true={BooksData}>
+                    <template for:each={BooksData.items} for:item="b">
+                        <lightning-layout-item size='3' padding="around-small" key={b.id}>
+                            <div class='slds-box slds-p-around_medium slds-text-align_center'>
+                                <!-- <template if:true={b.volumeInfo.imageLinks.smallThumbnail}>
+                                      <img src={b.volumeInfo.imageLinks.smallThumbnail} height="200px"/>
+                                </template>
+                                <template if:false={b.volumeInfo.imageLinks.smallThumbnail}>
+                                     No Priveiw <img src={b.volumeInfo.imageLinks.smallThumbnail} height="200px"/>
+                                </template> -->
+                                <div class='slds-text-heading_small slds-p-vertical_medium'>
+                                    <strong>{b.volumeInfo.title}</strong></div> 
+                                  <div><strong>Published Date -</strong>{b.volumeInfo.publishedDate}</div>
+                                <div><strong>Average Rating</strong>{b.volumeInfo.averageRating}</div>
+                              
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+                </template>
+            </lightning-layout>
+
+        </div>
+    </lightning-card> 
+</template>

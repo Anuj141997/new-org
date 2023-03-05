@@ -1,0 +1,12 @@
+<apex:page controller="PdfPageController" renderAs="pdf" applyHtmlTag="false"
+        showHeader="false" cache="true" readOnly="true">
+    <html>  
+           <head> 
+            <meta http-equiv='Content-type' content='text/html:charset=UTF-8'/>
+           </head>
+            <apex:outputText value="{!currentId}" escape="false"/>
+           <apex:outputText value="{!pdfText}" escape="false"/> 
+    </html>
+
+
+</apex:page>

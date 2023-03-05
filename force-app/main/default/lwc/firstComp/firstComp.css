@@ -1,0 +1,29 @@
+.actions {
+    background-color: #ccc;
+    width: 100%;
+    height: fit-content;
+    padding: 1rem 0;
+    margin-top: 0;
+}
+
+.search {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.input {
+    background-color: rgb(255, 255, 255);
+     width:300px;
+    border-radius: 6px;
+    margin-top: 4px;
+    outline: none;
+    border: 1px solid #ccc;
+    padding: 6px 8px
+}
+
+.input:focus {
+    border: 1px solid rgb(129, 210, 241);
+    background-color: #eee;
+    outline: none;
+}

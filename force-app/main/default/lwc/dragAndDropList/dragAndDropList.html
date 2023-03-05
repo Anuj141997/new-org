@@ -1,0 +1,11 @@
+<template>
+
+
+    <ul class='slds-has-dividers_around-space dropZone' style='height: 70vh; overflow-y: auto;'
+    ondragover={handleDragOver} ondrop={handleDrop}>
+        <template for:each={records} for:item="r">
+            <c-drag-and-drop-card stage={stage} record={r} key={r.Id} onitemdrag={itemDrag}></c-drag-and-drop-card>
+        </template>
+    </ul>
+    
+</template>

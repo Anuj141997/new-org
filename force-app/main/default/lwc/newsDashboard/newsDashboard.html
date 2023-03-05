@@ -1,0 +1,57 @@
+<template>
+    
+    <div class='heading slds-text-align_center slds-text-heading_medium'>
+        
+                        News Dashboard
+    </div>
+
+    <div class='container'>
+        <div class='slds-grid slds-gutters justify-center slds-wrap'>
+            <template for:each={result} for:item="r">
+                    <div key={r.id} class='card'>
+                        <img class='card-image' src={r.urlToImage}/>
+                        <div class='card-text'>
+                            <span class='date'>
+                                {r.date}
+                            </span>
+                            <h2>{r.title}</h2>
+                        </div>
+                        <div class='card-stats' onclick={openModal} data-id={r.id}>Read More</div>
+                    </div>
+            </template>
+        </div>
+    </div>
+
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class={modalClass}>
+        <div class="slds-modal__container">
+        <header class="slds-modal__header">
+        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" 
+                   onclick={closeModal} title="Close">
+            <lightning-icon icon-name="utility:close" alternative-text="Close"
+                      variant='inverse' size="small"></lightning-icon>
+        </button>
+        <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">{selectedNews.title}</h2>
+        </header>
+
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+            <img src={selectedNews.urlToImage}/>
+            <div>
+                <div>Source : {selectedNews.name}</div>
+                <div>{selectedNews.date}</div>
+            </div>
+            <p class="content">
+                {selectedNews.content}<a href={selectedNews.url} target="_blank">Go to Source</a>
+            </p>
+            <template if:true={selectedNews.author}>
+                <div class='footer'>
+                    <div>Author - {selectedNews.author}</div>
+                </div>
+            </template>
+
+        </div>
+
+        </div>
+    </section>
+<div class={modalBackClass}></div>
+</template>

@@ -1,0 +1,22 @@
+<template>
+
+    <lightning-card title='record'>
+        <lightning-record-edit-form object-api-name='Contact'
+                    onsuccess={success}>
+            <div class='slds grid'>
+                <div class='slds-col slds-size_1-of-2'>
+                       <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                <span class="slds-truncate slds-p-horizontal_small" title="General Information">General Information
+                    <lightning-helptext content="Fill out the General information for Contact"></lightning-helptext>
+                </span>
+                </h3>
+                    <lightning-input-field field-name="AccountId"></lightning-input-field>
+                    <lightning-button type="submit" label='save'></lightning-button>
+                </div>
+            </div>
+            </div>
+        </lightning-record-edit-form>
+    </lightning-card>
+    
+</template>

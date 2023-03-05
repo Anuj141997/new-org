@@ -1,0 +1,10 @@
+.loader::after
+{
+    position: absolute;
+    width:100%;
+    content:attr(data-text);
+    text-align: center;
+    font-weight: bold;
+    top:calc(50% + 1.5rem);
+    color:grey;
+}

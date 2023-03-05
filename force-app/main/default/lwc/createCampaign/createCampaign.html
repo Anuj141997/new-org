@@ -1,0 +1,41 @@
+<!--
+  @description       : 
+  @author            : Anuj Panwar
+  @group             : 
+  @last modified on  : 10-18-2022
+  @last modified by  : Anuj Panwar
+  Modifications Log
+  Ver   Date         Author        Modification
+  1.0   10-18-2022   Anuj Panwar   Initial Version
+-->
+<template>
+  <lightning-card title="Create Campaign">
+    <lightning-input
+      type="text"
+      label="Campaign Name"
+      name="Name"
+      value={name}
+      onchange={hanldeChange}
+    ></lightning-input>
+    <lightning-input
+      type="Date"
+      label="Start Date"
+      name="StartDate"
+      value={sdate}
+      onchange={hanldeChange}
+    ></lightning-input>
+    <lightning-input
+      type="Date"
+      label="End Date"
+      name="EndDate"
+      value={edate}
+      onchange={hanldeChange}
+    ></lightning-input>
+
+    <lightning-button
+      variant="brand"
+      label="Save"
+      onclick={createRecord}
+    ></lightning-button>
+  </lightning-card>
+</template>

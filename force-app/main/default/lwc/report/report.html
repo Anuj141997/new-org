@@ -1,0 +1,107 @@
+<template>
+    <lightning-card title='Report'>
+          <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                <span class="slds-truncate slds-p-horizontal_small" title="Filter">Filter Options
+                    <lightning-helptext content="Filter out Data"></lightning-helptext>
+                </span>
+                </h3>
+        <lightning-layout style='margin-bottom: 20px;'>
+            <lightning-layout-item size='3' style='margin-left: 20px;'>
+                <!-- <c-search-contact-filter onsrc={searchChange}></c-search-contact-filter> -->
+                 <lightning-input type='search' value={srcCon} onchange={searchChange} 
+                label='Search CaseNumber'></lightning-input>
+                <!-- <input type='search' name='cont' value={srcCon} onchange={searchChange}> -->
+
+            </lightning-layout-item>
+             <lightning-layout-item size='2' style='margin-left: 120px;'>
+               
+                <input type='search' name='cnm'  onchange={serchChange}>
+            </lightning-layout-item>
+
+             <!-- <lightning-layout-item size='2' style='margin-left: 15px;'>
+                
+                    <lightning-combobox
+                        label='Case Status'
+                        value={StatusFilterValue}
+                        placeholder='Select Status'
+                        options={StatusPick.data.values}
+                        onchange={searchhange}></lightning-combobox>
+                       
+                  
+            </lightning-layout-item>
+             <lightning-layout-item size='2' style='margin-left: 15px;'>
+                <lightning-combobox
+                        label='Action Taken'
+                        value={ActionFilterValue}
+                        placeholder='Select Action'
+                        options={ActionPick.data.values}
+                        onchange={searchhange}></lightning-combobox>
+            </lightning-layout-item> -->
+        </lightning-layout> 
+        </div>
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+            <thead>
+              <tr>
+               
+                <th scope="col" style='width: 420px;'>
+                    <div class='slds-truncate' title='Contact'>Contact</div>
+                </th>
+                <th scope="col" style='width: 200px;'>
+                    <div class='slds-truncate' title='Case'>Case Number</div>
+                </th>
+                <th scope="col" style='width: 200px;'>
+                    <div class='slds-truncate' title='Status'>Status</div>
+                </th>  
+                <th scope="col">
+                    <div class='slds-truncate' title='Action'>Action Taken</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                <template for:each={ReportData} for:item='acc' for:index='index'>
+                   
+                    <tr key={acc.Id}>
+                        <td >
+                            Contact Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {acc.Name}  <br>
+                            Case Status  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {acc.Id}  
+
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <template for:each={acc.Cases} for:item='cas'>
+                        <tr key={acc.Id}>
+                            <td></td>                            
+                          <td style='text-align: right;'>  {cas.CaseNumber}
+                          </td>  
+                          <td align='left'>{cas.Status}</td>
+                          </tr>
+                        </template>
+                      
+                                                  
+                        <!-- <td>
+                            <lightning-input name='accind' access-key={index} id={index} type='text' onchange={change} value={acc.Industry} ></lightning-input>
+                        </td>
+                        <td>
+                            <lightning-input name='accphn' access-key={index} id={index} type='text' onchange={change} value={acc.Phone}></lightning-input>
+                        </td>
+                        <td>
+                            <lightning-icon icon-name='utility:delete' alternative-text='Delete' variant='border-inverse' access-key={index} id={index}  onclick={del} size='small' ></lightning-icon>
+                        </td> -->
+                   
+                </template>
+              
+            </tbody>
+          </table>
+   
+
+            
+        
+        
+         
+    </lightning-card>
+    
+</template>
